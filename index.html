@@ -31,9 +31,8 @@
     gap: 0.75rem;
     z-index: 1000;
   }
-  /* モダンなグラデボタン共通 */
-  .btn-modern,
-  .gtranslate_wrapper select {
+  /* お問い合わせボタン */
+  .btn-modern {
     background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
     color: white;
     padding: 0.55rem 1.1rem;
@@ -44,11 +43,37 @@
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0,0,0,0.12);
     transition: all 0.25s ease;
-    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
-  .btn-modern:hover,
-  .gtranslate_wrapper select:hover {
+  .btn-modern:hover {
     background: linear-gradient(135deg, var(--grad-start-hover), var(--grad-end-hover));
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.16);
+  }
+  /* GTranslateセレクトを常時グラデに */
+  .gtranslate_wrapper select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background: linear-gradient(135deg, var(--grad-start), var(--grad-end)) !important;
+    color: white !important;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    transition: all 0.25s ease;
+    padding-right: 1.8rem;
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 10px 6px;
+  }
+  .gtranslate_wrapper select:hover {
+    background: linear-gradient(135deg, var(--grad-start-hover), var(--grad-end-hover)) !important;
     transform: translateY(-1px);
     box-shadow: 0 6px 14px rgba(0,0,0,0.16);
   }
@@ -92,20 +117,44 @@
     color: var(--muted);
     margin-top: 0.5rem;
   }
-  /* GTranslate セレクト調整 */
-  .gtranslate_wrapper select {
-    padding-right: 1.8rem; /* 矢印用余白 */
-    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.8rem center;
-    background-size: 10px 6px;
+  /* モーダル */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+  }
+  .modal-content {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    max-width: 90%;
+    width: 640px;
+    max-height: 90%;
+    overflow: auto;
+  }
+  .modal-content iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+  }
+  .close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--muted);
+    float: right;
+    cursor: pointer;
   }
 </style>
 </head>
 <body>
 
 <header>
-  <button class="btn-modern" onclick="document.getElementById('contactModal').style.display='flex'">✉ お問い合わせ</button>
+  <button class="btn-modern" id="openForm">✉ お問い合わせ</button>
   <div class="gtranslate_wrapper"></div>
 </header>
 
@@ -121,11 +170,11 @@
   <div class="muted">© 2025 Ruri</div>
 </main>
 
-<!-- お問い合わせモーダル -->
-<div class="modal" id="contactModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:2000;">
-  <div style="background:white; padding:1rem; border-radius:10px; max-width:90%; width:640px; max-height:90%; overflow:auto;">
-    <button onclick="document.getElementById('contactModal').style.display='none'" style="background:none;border:none;font-size:1.5rem;color:var(--muted);float:right;cursor:pointer;">&times;</button>
-    <iframe src="https://docs.google.com/forms/d/e/フォームのID/viewform?embedded=true" style="width:100%;height:600px;border:none;"></iframe>
+<!-- モーダル -->
+<div class="modal" id="contactModal">
+  <div class="modal-content">
+    <button class="close" id="closeForm">&times;</button>
+    <iframe src="https://docs.google.com/forms/d/e/フォームのID/viewform?embedded=true">読み込んでいます…</iframe>
   </div>
 </div>
 
@@ -138,6 +187,13 @@ window.gtranslateSettings = {
 };
 </script>
 <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+
+<script>
+  const modal = document.getElementById('contactModal');
+  document.getElementById('openForm').onclick = () => { modal.style.display = 'flex'; }
+  document.getElementById('closeForm').onclick = () => { modal.style.display = 'none'; }
+  window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; }
+</script>
 
 </body>
 </html>
