@@ -1,171 +1,95 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>るり - Developer Profile</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>るり</title>
 <style>
   :root {
-    --primary-color: #1E3A8A; /* ネイビーブルー */
-    --secondary-color: #2563EB; /* 鮮やかなブルー */
-    --bg-color: #F9FAFB; /* 明るい背景 */
-    --text-color: #111827; /* 落ち着いた黒 */
-    --accent-color: #F59E0B; /* アンバー／ゴールド */
-    --max-width: 900px;
-    --radius: 8px;
+    --bg: #ffffff;
+    --fg: #111827;
+    --muted: #6b7280;
+    --chip-bg: #f3f4f6;
+    --chip-br: #e5e7eb;
   }
-
-  body {
-    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0b0f14; --fg:#e5e7eb; --muted:#9ca3af; --chip-bg:#111827; --chip-br:#374151; }
+    html { color-scheme: dark; }
+  }
+  html, body {
+    height: 100%;
     margin: 0;
-    padding: 0;
   }
-
-  header, section {
-    max-width: var(--max-width);
-    margin: auto;
-    padding: 2rem;
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    display: grid;
+    place-items: center;
+    min-height: 100dvh; /* 動的ビューポート対応 */
+    overflow: hidden;   /* スクロール無効 */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
-
-  header {
+  .card {
     text-align: center;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: 4rem 2rem;
+    width: min(92vw, 520px);
   }
-
-  header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.3rem;
+  h1 {
+    font-size: clamp(20px, 4.5vw, 32px);
+    margin: 0 0 10px;
+    letter-spacing: .02em;
   }
-
-  header p {
-    font-size: 1.2rem;
-    opacity: 0.95;
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 12px;
   }
-
-  .avatar {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.3);
-    margin: auto;
-    margin-bottom: 1rem;
-  }
-
-  h2 {
-    border-bottom: 3px solid var(--accent-color);
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  ul li {
-    background: white;
-    padding: 0.6rem 1rem;
-    border-radius: var(--radius);
-    margin-bottom: 0.5rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  }
-
-  section p {
-    background: white;
-    padding: 1rem;
-    border-radius: var(--radius);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  }
-
-  #contact a {
-    color: var(--secondary-color);
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: var(--chip-bg);
+    border: 1px solid var(--chip-br);
+    color: inherit;
     text-decoration: none;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    transition: background .15s ease, transform .05s ease;
   }
-  
-  #contact a:hover {
-    text-decoration: underline;
-    color: var(--accent-color);
+  .links a:active { transform: translateY(1px); }
+  .hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
   }
-
-  @media (max-width: 600px) {
-    header h1 { font-size: 1.8rem; }
-    header p { font-size: 1rem; }
-  }
+  /* 小画面でもワンビューに収まるよう余白を最小限に */
+  .spacer { height: 6px; }
 </style>
 </head>
 <body>
-
-<header>
-  <div class="avatar"><!-- プロフィール画像挿入 --></div>
-  <h1>るり</h1>
-  <p>Server & Web Engineering with a Focus on Stability, Security, and Scalability</p>
-</header>
-
-<section id="about">
-  <h2>自己紹介</h2>
-  <p>
-    日本を拠点に、自宅サーバー運用・Xserver/VPS活用する一般人。<br>
-    サーバー構築から障害対応、負荷試験、複数代替案提示まで一貫対応。<br>
-    Webアクセス改善・SEO対策、認証/決済/トンネル/オーバーレイNW設計、UI/UX設計、Cloudflare運用、Bloggerテンプレート開発など幅広い領域で成果を提供。
-  </p>
-</section>
-
-<section id="skills">
-  <h2>スキル</h2>
-  <ul>
-    <li>C言語・HTML/CSS/JavaScript・Python</li>
-    <li>サーバー構築・運用・冗長化設計</li>
-    <li>Cloudflare Workers/Pages運用、DNS/SSL管理</li>
-    <li>Webアクセス改善・SEO・セキュリティ対策</li>
-    <li>認証/決済/トンネル/オーバーレイNW設計</li>
-    <li>UI/UX設計（心理的安全性・品質重視）</li>
-  </ul>
-</section>
-
-<section id="projects">
-  <h2>実績／プロジェクト</h2>
-  <ul>
-    <li><strong>rurimaru.net</strong> 取得・ブランド設計・Cloudflare Pages連携</li>
-    <li>Bloggerテンプレート開発と公開</li>
-    <li>Webアクセス速度最適化とSEO改善</li>
-    <li>サーバー冗長化設計およびコスト最適化</li>
-    <li>技術検証と成果物のテンプレート化・公開</li>
-  </ul>
-</section>
-
-<section id="activities">
-  <h2>活動履歴</h2>
-  <ul>
-    <li>技術コミュニティでの知見共有</li>
-    <li>技術検証ドキュメント・テンプレートの公開</li>
-    <li>地元ネットワーク事情に基づく最適化提案</li>
-  </ul>
-</section>
-
-<section id="contact">
-  <h2>連絡先</h2>
-  <ul>
-    <li>Email: <a href="mailto:example@example.com">example@example.com</a></li>
-    <li>GitHub: <a href="https://github.com/yourname" target="_blank">github.com/</a></li>
-    <li>LinkedIn: <a href="https://linkedin.com/in/" target="_blank">linkedin.com/in/</a></li>
-    <li>Twitter/X: <a href="https://x.com/" target="_blank">@yourhandle</a></li>
-  </ul>
-</section>
-
-<section id="summary-en">
-  <h2>English Summary</h2>
-  <p>
-    An IT engineer based in Tokyo, specializing in server operations, web optimization, network design, and security.
-    Proven track record in delivering reproducible and reliable infrastructure and web solutions, integrating Cloudflare, SEO improvements, and UI/UX enhancements.
-  </p>
-</section>
-
+  <main class="card" role="main" aria-label="Profile">
+    <h1>るり</h1>
+    <div class="spacer"></div>
+    <nav class="links" aria-label="SNS links">
+      <a href="https://github.com/yourname" target="_blank" rel="noopener" aria-label="GitHub">
+        <span>GitHub</span>
+      </a>
+      <a href="https://x.com/yourhandle" target="_blank" rel="noopener" aria-label="X">
+        <span>X</span>
+      </a>
+      <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <span>LinkedIn</span>
+      </a>
+      <a href="https://bsky.app/profile/yourname.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky">
+        <span>Bluesky</span>
+      </a>
+      <!-- 追加する場合は上の <a> をコピペ。項目が増えると1行→2行に折り返しますが、画面内に収まる最小レイアウトです。 -->
+    </nav>
+    <div class="hint">リンク先を自分のアカウントに置き換えてください。</div>
+  </main>
 </body>
 </html>
