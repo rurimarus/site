@@ -9,6 +9,7 @@
     --bg: #ffffff;
     --fg: #111827;
     --accent: #2563EB;
+    --accent-hover: #1E40AF;
     --muted: #6b7280;
   }
   body {
@@ -22,27 +23,51 @@
   }
   header {
     position: absolute;
-    top: 0;
-    width: 100%;
+    top: 1rem;
+    right: 1rem;
     display: flex;
-    justify-content: flex-end;
-    padding: 1rem;
-    gap: 0.5rem;
-    align-items: center;
+    gap: 0.75rem;
+    z-index: 1000;
   }
-  .btn {
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: white;
+  .btn-modern {
     background: var(--accent);
-    transition: background 0.2s ease;
+    color: white;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
     border: none;
     cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
-  .btn:hover { background: #1E40AF; }
+  .btn-modern:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.16);
+  }
+  /* GTranslate セレクトのデザイン調整 */
+  .gtranslate_wrapper select {
+    appearance: none;
+    border: none;
+    background: var(--accent);
+    color: white;
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    transition: all 0.25s ease;
+  }
+  .gtranslate_wrapper select:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.16);
+  }
   .card {
     text-align: center;
     max-width: 400px;
@@ -83,25 +108,12 @@
     color: var(--muted);
     margin-top: 0.5rem;
   }
-  /* GTranslateのデフォルトスタイルをリセット */
-  .gtranslate_wrapper select {
-    appearance: none;
-    border: none;
-    background: var(--accent);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .gtranslate_wrapper select:hover { background: #1E40AF; }
 </style>
 </head>
 <body>
 
 <header>
-  <a class="btn" href="mailto:example@example.com">お問い合わせ</a>
+  <a href="mailto:example@example.com" class="btn-modern">✉ お問い合わせ</a>
   <div class="gtranslate_wrapper"></div>
 </header>
 
@@ -117,7 +129,7 @@
   <div class="muted">© 2025 Ruri</div>
 </main>
 
-<!-- GTranslateの設定 -->
+<!-- GTranslate設定 -->
 <script>
 window.gtranslateSettings = {
   default_language: "ja",
