@@ -1,95 +1,131 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>るり</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>るり - Profile</title>
 <style>
   :root {
     --bg: #ffffff;
     --fg: #111827;
+    --accent: #2563EB;
     --muted: #6b7280;
-    --chip-bg: #f3f4f6;
-    --chip-br: #e5e7eb;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#0b0f14; --fg:#e5e7eb; --muted:#9ca3af; --chip-bg:#111827; --chip-br:#374151; }
-    html { color-scheme: dark; }
-  }
-  html, body {
-    height: 100%;
-    margin: 0;
   }
   body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+    margin: 0;
+    font-family: system-ui, sans-serif;
     background: var(--bg);
     color: var(--fg);
     display: grid;
     place-items: center;
-    min-height: 100dvh; /* 動的ビューポート対応 */
-    overflow: hidden;   /* スクロール無効 */
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    height: 100vh;
   }
+  header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    background: var(--accent);
+    transition: background 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .btn:hover { background: #1E40AF; }
   .card {
     text-align: center;
-    width: min(92vw, 520px);
+    max-width: 400px;
+  }
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    margin: 0 auto 1rem;
+    background-size: cover;
+    background-position: center;
   }
   h1 {
-    font-size: clamp(20px, 4.5vw, 32px);
-    margin: 0 0 10px;
-    letter-spacing: .02em;
+    margin: 0 0 0.3rem;
+    font-size: 1.8rem;
   }
   .links {
+    margin-top: 1rem;
     display: flex;
-    flex-wrap: wrap;
+    gap: 0.5rem;
     justify-content: center;
-    gap: 10px 12px;
+    flex-wrap: wrap;
   }
   .links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    border-radius: 999px;
-    background: var(--chip-bg);
-    border: 1px solid var(--chip-br);
-    color: inherit;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .01em;
-    transition: background .15s ease, transform .05s ease;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--fg);
+    transition: background 0.2s;
   }
-  .links a:active { transform: translateY(1px); }
-  .hint {
-    margin-top: 10px;
-    font-size: 12px;
+  .links a:hover { background: #f3f4f6; }
+  .muted {
+    font-size: 0.85rem;
     color: var(--muted);
+    margin-top: 0.5rem;
   }
-  /* 小画面でもワンビューに収まるよう余白を最小限に */
-  .spacer { height: 6px; }
+  /* GTranslateのデフォルトスタイルをリセット */
+  .gtranslate_wrapper select {
+    appearance: none;
+    border: none;
+    background: var(--accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .gtranslate_wrapper select:hover { background: #1E40AF; }
 </style>
 </head>
 <body>
-  <main class="card" role="main" aria-label="Profile">
-    <h1>るり</h1>
-    <div class="spacer"></div>
-    <nav class="links" aria-label="SNS links">
-      <a href="https://github.com/yourname" target="_blank" rel="noopener" aria-label="GitHub">
-        <span>GitHub</span>
-      </a>
-      <a href="https://x.com/yourhandle" target="_blank" rel="noopener" aria-label="X">
-        <span>X</span>
-      </a>
-      <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <span>LinkedIn</span>
-      </a>
-      <a href="https://bsky.app/profile/yourname.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky">
-        <span>Bluesky</span>
-      </a>
-      <!-- 追加する場合は上の <a> をコピペ。項目が増えると1行→2行に折り返しますが、画面内に収まる最小レイアウトです。 -->
-    </nav>
-    <div class="hint">リンク先を自分のアカウントに置き換えてください。</div>
-  </main>
+
+<header>
+  <a class="btn" href="mailto:example@example.com">お問い合わせ</a>
+  <div class="gtranslate_wrapper"></div>
+</header>
+
+<main class="card">
+  <div class="avatar" style="background-image:url('your-profile.jpg');"></div>
+  <h1>るり</h1>
+  <div class="links">
+    <a href="https://github.com/yourname" target="_blank">GitHub</a>
+    <a href="https://x.com/yourhandle" target="_blank">X</a>
+    <a href="https://linkedin.com/in/yourname" target="_blank">LinkedIn</a>
+    <a href="https://bsky.app/profile/yourname" target="_blank">Bluesky</a>
+  </div>
+  <div class="muted">© 2025 Ruri</div>
+</main>
+
+<!-- GTranslateの設定 -->
+<script>
+window.gtranslateSettings = {
+  default_language: "ja",
+  languages: ["ja","en","it","es","ko","zh-CN","zh-TW"],
+  wrapper_selector: ".gtranslate_wrapper"
+};
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+
 </body>
 </html>
